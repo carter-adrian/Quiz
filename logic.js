@@ -2,8 +2,8 @@
 
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
-var time = questions.length * 15;
-var timerId;
+var time = questionsEl.length * 15;
+var timerId = 0;
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById('questions');
@@ -15,9 +15,10 @@ var initialsEl = document.getElementById('initials');
 var feedbackEl = document.getElementById('feedback');
 
 // sound effects
-var sfxRight = new Audio('assets/sfx/correct.wav');
-var sfxWrong = new Audio('assets/sfx/incorrect.wav');
+// var sfxRight = new Audio('assets/sfx/correct.wav');
+// var sfxWrong = new Audio('assets/sfx/incorrect.wav');
 
+startBtn.addEventListener ("click", startQuiz());
 
 function startQuiz() {
 startBtn.classList.add('hide')
@@ -28,11 +29,11 @@ getQuestion()}
 // un-hide questions section
 
     //start timer (high)    
-you need to declare a var named timerId. You will also need to use setInterval and clockTick
+// you need to declare a var named timerId. You will also need to use setInterval and clockTick
 
     //show starting time (high)
 
-    getQuestion();
+    // getQuestion();
 
 
 function getQuestion() { //this function is going to get the data from the questions array
@@ -117,26 +118,25 @@ function clockTick() {
 
 
 function saveHighscore() {
-    // get value of input box
     var initials = initialsEl.value.trim();
 
-    // make sure value wasn't empty
     if (initials !== '') {
+        var highscores = 
+        JSON.parse(window.localStorage.getItem('highscorees')) || [];
 
-        //JSON.parse
-        // get saved scores from localstorage (highscores), or if not any, set to empty array
+        var newScore = {
+            score: time,
+            initials: initials,
+        };
         
-
-        // format new score object for current user
+        highscores.push(newScore);
+        window.localStorage.setItem('highscores', JSON.stringify(highscores))    
         
-
-        // save to localstorage
-        
-
-        // redirect to next page
         window.location.href = 'highscores.html';
     }
 }
+
+
 
 function checkForEnter(event) {
     // "13" represents the enter key
