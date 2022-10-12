@@ -2,8 +2,8 @@
 
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
-var time = questionsEl.length * 15;
-var timerId = 0;
+var time = questions.length * 15;
+var timerId;
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById('questions');
@@ -18,27 +18,25 @@ var feedbackEl = document.getElementById('feedback');
 // var sfxRight = new Audio('assets/sfx/correct.wav');
 // var sfxWrong = new Audio('assets/sfx/incorrect.wav');
 
-startBtn.addEventListener ("click", startQuiz());
 
 function startQuiz() {
-startBtn.classList.add('hide')
-questionsEl.ariaSort(() =>Math.random() -0.5)
-currentQuestionIndex = 0;
-questionsEl.classList.remove('hide')
-getQuestion()}
+var startScreenEL = document.getElementById('start-screen')
+startScreenEL.setAttribute('class', 'hide')
 // un-hide questions section
+questionsEl.removeAttribute('class')
+//start timer (high)
+setInterval(clockTick, 1000)
 
-    //start timer (high)    
 // you need to declare a var named timerId. You will also need to use setInterval and clockTick
 
     //show starting time (high)
-
-    // getQuestion();
-
+timerEl.textContent = time;
+    getQuestion();
+}
 
 function getQuestion() { //this function is going to get the data from the questions array
     // get current question object from array
-    var currentQuestion = questions[currentQuestionIndex]
+    var currentQuestion = questions [currentQuestionIndex]
 
     // update title with current question
     var titleEl = document.getElementById('question-title');
@@ -50,6 +48,13 @@ function getQuestion() { //this function is going to get the data from the quest
     // create a for loop that creates the choice elements
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         // create new button for each choice
+        var choice =currentQuestion.choices[i];
+                //.createElement
+        var buttonEl = document.createElement('button')
+        buttonEl.setAttribute('class', 'choice')
+        buttonEl.setAttribute('value', choice)
+        buttonEl.textContent =i + 1 + '.' + choice
+        choicesEl.appendChild(buttonEl)
         //.createElement
         //.setAttribute (set a class="choice")
         //.textContent
@@ -66,16 +71,29 @@ function questionClick(event) {
     }
 
     // check if user guessed right or wrong
-    if (true) { //replace true with a conditional statement that checks if the clicked choice button's value is the same as the questions[currentQuestionIndex]'s answer
+    if (!buttonEl.value !== questions[currentQuestionIndex].answer) { //replace true with a conditional statement that checks if the clicked choice button's value is the same as the questions[currentQuestionIndex]'s answer
         //incorrect answer scenario
-
+        time -= 5;
+        if (time < 0) {
+            time = 0
+        }
         // penalize time
         // display new time on page
+        timerEl.textContent = time
+        feedbackEl.textContent = "Wrong answer!"
     } else {
+
+        feedbackEl.textContent = "Correct!"
         //correct scenario
 
         // move to next question
     }
+
+    feedbackEl.setAttribute('class', 'feedback');
+    setTimeout (function() {
+        feedbackEl.setAttribute('class', 'feedback hide');
+
+    }, 3000);
     // flash right/wrong feedback on page
 
     // move to next question
@@ -121,12 +139,11 @@ function saveHighscore() {
     var initials = initialsEl.value.trim();
 
     if (initials !== '') {
-        var highscores = 
-        JSON.parse(window.localStorage.getItem('highscorees')) || [];
+        var highscores = JSON.parse(window.localStorage.getItem('highscores')) || [];
 
         var newScore = {
             score: time,
-            initials: initials,
+            initials: initials
         };
         
         highscores.push(newScore);
