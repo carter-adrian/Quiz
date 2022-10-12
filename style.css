@@ -1,71 +1,78 @@
-nav {
+*{
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+nav, .scores{
+    padding: 0;
+    padding-bottom: 20px;
     margin: 0;
     display: flex;
     justify-content:space-between ;
     font: 30px bold;
 }
+
+.scores{
+    margin-bottom: 0;
+    padding: 0;
+}
+
+body    {
+    background-image: url("Big\ Wave\ Hokusai.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: bisque;
+}
 .wrapper {
     padding: 0;
-    margin: 0;
+    margin: 15% 30% 0 30%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     text-align: center;
-    /* background-color: hsl(var(--hue-neutral), 100%,20%); */
+    font-size: 20px;
+    background-color: rgb(103, 103, 165);
+    color: antiquewhite;
 
 }
+
+#high{
+    display: flex;
+    justify-content: center;
+
+
+}
+#clear{
+    margin: 0 100px 0 100px;
+}
+
 
 h1 {
     font: 40px bold;
-    background-color: aqua;
-    border-radius: 100%;
 }
+ p {
+    font-size: 20px;
+    color: antiquewhite;
 
-.container {
-    width: 800px;
-    max-width: 80%;
-    background-color: aliceblue;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 0 10px 2px;
-}
-
-.btn-grid {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px;
-    margin: 20px 0;
-}
-.btn {
-    --hue: var(--hue-neutral);
-    border: 1px solid hsl(var(--hue), 100%, 30%);
-    background-color: hsl(var(--hue), 100%, 30%);
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: aliceblue;
+ }
+ 
+ button {
     outline: none;
-    cursor: pointer;
-}
+    background-color: antiquewhite;
+ }
 
-.btn:hover {
-    border-color: black;
-}
+ button:hover {
+cursor: pointer;
+ }
 
-.start-btn, 
-.next-btn {
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 10px 20px;
-    cursor: pointer;
+ .questions {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
+ }
 
-}
-
-.controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+ #end-screen {
+    margin-bottom: 5%;
+ }
 
 .hide {
     display: none;
